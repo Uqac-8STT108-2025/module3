@@ -9,22 +9,71 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r importation-dataset}
+df <- read.csv("College.csv")
+head(df)
 ```
 
-## Including Plots
+## Exercice 1 :
 
-You can also embed plots, for example:
+Pour chacune des parties (a) à (d), indiquez si nous nous attendons généralement à ce que les performances d’une méthode d’apprentissage statistique flexible soient meilleures ou pires que celles d’une méthode rigide. Justifiez votre réponse.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+(a)- La taille de l’échantillon 
+est extrêmement grande et le nombre de prédicteurs 
+est petit.
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+**Rép** : Si on a beaucoup de données et peu de prédicteurs, c'est mieux d'opter pour une méthode rigide. Cela évitera 
+de trop s'adapter aux donner et créer des problèmes de sur ajustement.
+
+(b)- Le nombre de prédicteurs 
+est extrêmement grand et le nombre d’observations 
+est petit
+
+**Rép** : La méthode rigide est encore mieux. En effet, avec peu d'observations, une méthode flexible a 
+assez de lattitude pour s'ajuster à l'ensemble des observations et mal généraliser. 
+
+(c)- La relation entre les prédicteurs et la réponse est fortement non linéaire.
+
+**Rép** (je ne sais pas)
+
+(d)-La variance des termes d’erreur, c’est-à-dire 
+, est extrêmement élevé
+
+**Rép** : 
+
+
+## Exercice 2 :
+
+Expliquez si chaque scénario est un problème de classification ou de régression, et indiquez si nous sommes plus intéressés par l’inférence ou la prédiction. 
+
+
+(a)-Nous collectons un ensemble de données sur les 500 plus grandes entreprises aux États-Unis. Pour chaque entreprise, nous enregistrons les bénéfices, le nombre d’employés, le secteur d’activité et le salaire du PDG. Nous souhaitons comprendre quels facteurs affectent le salaire du PDG.
+
+**Rep**: C'est un problème de **regression**, par ce que le salaire est quantitatif continue.
+On veut faire une **inférence**. par ce que ce n'est pas le salaire en soi qui nous interesse, mais les variables qui le
+déterminent.
+
+(b)-Nous envisageons de lancer un nouveau produit et souhaitons savoir si ce sera un succès ou un échec. Nous collectons des données sur 20 produits similaires précédemment lancés. Pour chaque produit, nous avons enregistré s’il s’agissait d’un succès ou d’un échec, le prix facturé pour le produit, le budget marketing, le prix de la concurrence et dix autres variables.
+
+**Rép**: C'est  un problème de **classification** (Succès ou échec), on veut faire une **prédiction**
+
+(c)- Nous souhaitons prédire la variation en % du taux de change USD/euro par rapport aux variations hebdomadaires des marchés boursiers mondiaux. C’est pourquoi nous collectons des données hebdomadaires pour toute l’année 2012. Pour chaque semaine, nous enregistrons le % de variation de la parité USD/Euro, le % de variation du marché américain, le % de variation du marché britannique et le % de variation du marché allemand.
+
+**Rép**: problème de **regression**, on veut faire une **prédiction**
+
+### Exercice 3 :
+
+### Exercice 4 
+
+### Exercice 5 
+
+### Exercice 6
+
+### Exercice 7 
+
+### Exercice 8
+
+### Pratique
+
+
