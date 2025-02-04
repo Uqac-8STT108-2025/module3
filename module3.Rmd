@@ -62,9 +62,53 @@ déterminent.
 
 **Rép**: problème de **regression**, on veut faire une **prédiction**
 
-### Exercice 3 :
+### Exercice 3
+
+```{r}
+df <- data.frame(
+  X1 = c(0, 2, 0, 0, -1, 1),
+  X2 = c(3, 0, 1, 1, 0, 1),
+  X3 = c(0, 0, 3, 2, 1, 1),
+  Y = c("Rouge", "Rouge", "Rouge", "Vert", "Vert", "Rouge")
+)
+print(df)
+```
+
+#a-Calculons la distance euclidienne entre chaque observation et le point de test
+
+on sait que X1=X2=X3=0 donc le point de test (0,0,0). 
+
+On sait que la distance euclidienne entre deux observationsest: distance <- sqrt(sum((x - y)^2))
+
+
+```{r}
+test <- c(0, 0, 0)
+distances <- sqrt(rowSums((df[, 1:3] - test)^2))
+df$Distance <- distances
+print(df)
+```
+b-Quelle est notre prédiction avec K=1 Pourquoi?
+
+#Pour K=1  la prédiction est  vert
+
+Car le point le plus proche de 1 est la distance de l'observation 5 de coordonner (−1,0,1)  qui de 1.41  et de couleur vert.
+
+c-Quelle est notre prédiction avec K=3 Pourquoi?
+
+#Pour K=3  La prediction est  Rouge 
+
+Car les 3 points les plus proches sont les observations 5, 6 et 2 avec des distances respectives
+Observation 5 (−1,0,1) distance 1.41 de couleur  Vert
+Observation 6 (1,1,1) distance 1.73 de couleur Rouge
+Observation 2 (2,0,0) distance 2 de couleur Rouge 
+et la couleur dominante est Rouge
+
+d-Si la règle de décision de Bayes dans ce problème est hautement non linéaire, alors nous attendrions-nous à ce que la meilleure valeur pour soit grande ou petite ? Pourquoi?
+
+Si la règle de décision de Bayes est hautement non linéaire, une petite valeur de k est préférable car Cela permet de mieux capturer les variations locales et les plus  frontières complexes.
 
 ### Exercice 4 
+Je l'ai fait sur feuille comment l'ajouter sur R aucune idée 
 
 ### Exercice 5 
 
