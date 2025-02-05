@@ -35,12 +35,12 @@ assez de lattitude pour s'ajuster à l'ensemble des observations et mal généra
 
 (c)- La relation entre les prédicteurs et la réponse est fortement non linéaire.
 
-**Rép** (je ne sais pas)
+**Rép**: La méthode flexible est meilleure afin de mieux capturer la complexité des relations.
 
 (d)-La variance des termes d’erreur, c’est-à-dire 
 , est extrêmement élevé
 
-**Rép** : 
+**Rép** : Si la variance est élevé cela signifie que il y a beaucoup de bruits donc en utilisant la méthode flexible, elle risque de faire un surajustement. Alors la méthode rigide est mieux adapter en sachant qu'elle est moins sensible au bruit.
 
 
 ## Exercice 2 :
@@ -52,15 +52,15 @@ Expliquez si chaque scénario est un problème de classification ou de régressi
 
 **Rep**: C'est un problème de **regression**, par ce que le salaire est quantitatif continue.
 On veut faire une **inférence**. par ce que ce n'est pas le salaire en soi qui nous interesse, mais les variables qui le
-déterminent.
+déterminent. La taille de l'échantillon n est 500 et le nombre de prédicteurs p est 4.
 
-(b)-Nous envisageons de lancer un nouveau produit et souhaitons savoir si ce sera un succès ou un échec. Nous collectons des données sur 20 produits similaires précédemment lancés. Pour chaque produit, nous avons enregistré s’il s’agissait d’un succès ou d’un échec, le prix facturé pour le produit, le budget marketing, le prix de la concurrence et dix autres variables.
+(b)-Nous envisageons de lancer un nouveau produit et souhaitons savoir si ce sera un succès ou un échec. Nous collectons des données sur 20 produits similaires précédemment lancés. Pour chaque produit, nous avons enregistré s’il s’agissait d’un succès ou d’un échec, le prix facturé pour le produit, le budget marketing, le prix de la concurrence et dix autres variables. 
 
-**Rép**: C'est  un problème de **classification** (Succès ou échec), on veut faire une **prédiction**
+**Rép**: C'est  un problème de **classification** (Succès ou échec), on veut faire une **prédiction**. La taille de l'échantillon n est 20 et le nombre de prédicteurs p est 13.
 
 (c)- Nous souhaitons prédire la variation en % du taux de change USD/euro par rapport aux variations hebdomadaires des marchés boursiers mondiaux. C’est pourquoi nous collectons des données hebdomadaires pour toute l’année 2012. Pour chaque semaine, nous enregistrons le % de variation de la parité USD/Euro, le % de variation du marché américain, le % de variation du marché britannique et le % de variation du marché allemand.
 
-**Rép**: problème de **regression**, on veut faire une **prédiction**
+**Rép**: problème de **regression**, on veut faire une **prédiction**.La taille de l'échantillon n est ... et le nombre de prédicteurs p est 4.
 
 ### Exercice 3
 
