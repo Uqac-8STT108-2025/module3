@@ -108,7 +108,8 @@ d-Si la règle de décision de Bayes dans ce problème est hautement non linéai
 Si la règle de décision de Bayes est hautement non linéaire, une petite valeur de k est préférable car Cela permet de mieux capturer les variations locales et les plus  frontières complexes.
 
 ## Exercice 4 
-Je l'ai fait sur feuille comment l'ajouter sur R aucune idée 
+
+LA question est manquante
 
 ## Exercice 5 
 a-Aperçu des courbes typiques 
