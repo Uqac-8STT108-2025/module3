@@ -62,7 +62,7 @@ déterminent. La taille de l'échantillon n est 500 et le nombre de prédicteurs
 
 **Rép**: problème de **regression**, on veut faire une **prédiction**.La taille de l'échantillon n est ... et le nombre de prédicteurs p est 4.
 
-### Exercice 3
+## Exercice 3
 
 ```{r}
 df <- data.frame(
@@ -74,7 +74,7 @@ df <- data.frame(
 print(df)
 ```
 
-#a-Calculons la distance euclidienne entre chaque observation et le point de test
+####a-Calculons la distance euclidienne entre chaque observation et le point de test
 
 on sait que X1=X2=X3=0 donc le point de test (0,0,0). 
 
@@ -89,13 +89,13 @@ print(df)
 ```
 b-Quelle est notre prédiction avec K=1 Pourquoi?
 
-#Pour K=1  la prédiction est  vert
+####Pour K=1  la prédiction est  vert
 
 Car le point le plus proche de 1 est la distance de l'observation 5 de coordonner (−1,0,1)  qui de 1.41  et de couleur vert.
 
 c-Quelle est notre prédiction avec K=3 Pourquoi?
 
-#Pour K=3  La prediction est  Rouge 
+####Pour K=3  La prediction est  Rouge 
 
 Car les 3 points les plus proches sont les observations 5, 6 et 2 avec des distances respectives
 Observation 5 (−1,0,1) distance 1.41 de couleur  Vert
@@ -107,10 +107,10 @@ d-Si la règle de décision de Bayes dans ce problème est hautement non linéai
 
 Si la règle de décision de Bayes est hautement non linéaire, une petite valeur de k est préférable car Cela permet de mieux capturer les variations locales et les plus  frontières complexes.
 
-### Exercice 4 
+## Exercice 4 
 Je l'ai fait sur feuille comment l'ajouter sur R aucune idée 
 
-### Exercice 5 
+## Exercice 5 
 a-Aperçu des courbes typiques 
 
 ```{r}
@@ -152,7 +152,7 @@ b- Explication de la forme de chacune des cinq courbes affichées précédement:
 - Erreur d'entraînement diminue avec la flexibilité qui augmente
 - Erreur de test est égale à biais_carre + variance + erreur irréductible, elle diminue à mesure que la flexibilité augmente atteignant sont minimum avant de croitre de nouveau à mesure que la flexibilité augmente.
 
-### Exercice 6
+## Exercice 6
 Description de trois applications réelles dans lesquelles la classification pourrait êre utile
 1- Classification des courriels (Spam vs Non-Spam)
 Problème : Filtrer les courriels indésirables (spam).
@@ -236,7 +236,7 @@ But: Prédiction
 L'objectif est de déterminer le salaire future d'une personne connaissant ses caractéristiques. 
 On ne s'interesse par aux niveau d'impacte de chacune de ses différentes variable.
 
-### Exercice 7 
+## Exercice 7 
 Avantages et inconvénients d’une approche très flexible (par rapport à une approche moins flexible) de régression ou de classification
 Avantages:
 Faible biais
@@ -253,7 +253,7 @@ On choisira un modèle moins fexible lorsque l'on a peut de données et que l'in
 
 
 
-### Exercice 8
+## Exercice 8
 Avantages d’une approche paramétrique en régression ou classification:
 - Moins de risque de sur-apprentissage (Overfitting)
 - Rapidité d’entraînement et d’inférence
@@ -263,22 +263,70 @@ Inconvenients d’une approche paramétrique en régression ou classification:
 - Plus de risque de sous-apprentissage (Underfitting)
 - s'ajuste mal sur des données complexes
 
-### Pratique
-```{r}
+## Pratique
+
+```{r partie a et b}
 #importation des données
 college <- read.csv("College.csv")
 #visualisation des données
+#View(college)
+#changement du nom des lignes
+rownames(college) = college[,1]
+# suppression de la colonne x
+college= college[, -1]
 View(college)
 
 ```
 
+c
+```{r partie c}
+#résumé numérique des données
+table(summary(college))
+
+#Afficher la matrice de nuage de points pour les 10 premières colonnes numériques
+college_10_first = college[,1:10]
+college_10_first_numeric <- college_10_first[, sapply(college_10_first, is.numeric)]  
+pairs(college_10_first_numeric, main="matrice de nuage de points pour les 10 premières colonnes numériques")
+
+#boxplot cote à cote
+#plot(Outstate~Private, data=college, main= "Boxplot de Outstate par Private",
+#     xlab = "Private(Yes/No)", ylab = "Outstate", col=c("lightblue", "lightgreen"),
+#     ylim(range(college$Outstate,na.rm = TRUE)))
+college$Private = as.factor(college$Private)
+plot(Outstate~Private, data = college, main = "Boxplot de Outstate par Private",
+    xlab = "Private (Yes/No)", ylab = "Outstate", col = c("lightblue", "lightgreen"),
+    ylim(range(college$Outstate,na.rm = TRUE)))
+#ggplot(college, aes(x = Private, y = Outstate, fill = Private)) +
+#  geom_boxplot() +
+#  theme_minimal() +
+#  labs(title = "Boxplots de Outstate en fonction de Private") +
+#  facet_wrap(~Private, scales = "fixed")
 
 
+#creation de la variable Elite
+Elite <- rep("No", nrow(college))
+Elite[college$Top10perc > 50] <- "Yes"
+Elite <- as.factor(Elite)
+college <- data.frame(college, Elite)
+
+#Nombre d'université d'elite
+summary(college$Elite)[2]
+
+#boxplot cote à cote de Outstate et Elite
+plot(Outstate~Elite, data = college, main = "Boxplot de Outstate par Elite",
+    xlab = "Elite (Yes/No)", ylab = "Outstate", col = c("lightblue", "lightgreen"),
+    ylim(range(college$Outstate,na.rm = TRUE)))
+
+#ggplot(college, aes(x = Elite, y = Outstate, fill = Elite)) +
+#  geom_boxplot() +
+#  theme_minimal() +
+#  labs(title = "Boxplots de Outstate en fonction de ") +
+#  facet_wrap(~Private, scales = "fixed")
 
 
+```
 
 
+```{r exploration}
 
-
-
-
+```
