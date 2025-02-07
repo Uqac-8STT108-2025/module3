@@ -62,7 +62,7 @@ déterminent. La taille de l'échantillon n est 500 et le nombre de prédicteurs
 
 **Rép**: problème de **regression**, on veut faire une **prédiction**.La taille de l'échantillon n est ... et le nombre de prédicteurs p est 4.
 
-### Exercice 3
+## Exercice 3
 
 ```{r}
 df <- data.frame(
@@ -74,11 +74,11 @@ df <- data.frame(
 print(df)
 ```
 
-#a-Calculons la distance euclidienne entre chaque observation et le point de test
+####a-Calculons la distance euclidienne entre chaque observation et le point de test
 
 on sait que X1=X2=X3=0 donc le point de test (0,0,0). 
 
-On sait que la distance euclidienne entre deux observationsest: distance <- sqrt(sum((x - y)^2))
+On sait que la distance euclidienne entre deux observations est: distance <- sqrt(sum((x - y)^2))
 
 
 ```{r}
@@ -89,13 +89,13 @@ print(df)
 ```
 b-Quelle est notre prédiction avec K=1 Pourquoi?
 
-#Pour K=1  la prédiction est  vert
+####Pour K=1  la prédiction est  vert
 
 Car le point le plus proche de 1 est la distance de l'observation 5 de coordonner (−1,0,1)  qui de 1.41  et de couleur vert.
 
 c-Quelle est notre prédiction avec K=3 Pourquoi?
 
-#Pour K=3  La prediction est  Rouge 
+####Pour K=3  La prediction est  Rouge 
 
 Car les 3 points les plus proches sont les observations 5, 6 et 2 avec des distances respectives
 Observation 5 (−1,0,1) distance 1.41 de couleur  Vert
@@ -107,17 +107,238 @@ d-Si la règle de décision de Bayes dans ce problème est hautement non linéai
 
 Si la règle de décision de Bayes est hautement non linéaire, une petite valeur de k est préférable car Cela permet de mieux capturer les variations locales et les plus  frontières complexes.
 
-### Exercice 4 
-Je l'ai fait sur feuille comment l'ajouter sur R aucune idée 
+## Exercice 4 
 
-### Exercice 5 
+LA question est manquante
 
-### Exercice 6
+## Exercice 5 
+a-Aperçu des courbes typiques 
 
-### Exercice 7 
+```{r}
+# Chargement des bibliothèques
+library(ggplot2)
+library(dplyr)
 
-### Exercice 8
+# Définition la flexibilité (axe X)
+variabitite <- seq(0, 15, length.out = 500)
 
-### Pratique
+# Définition des courbes
+erreur_bayes <- rep(0.5, length(variabitite))  # Erreur de Bayes (constante)
+biais_carre <- exp(-0.2 * variabitite)       # Biais(carré) diminue avec la flexibilité
+variance <- 0.1 * exp(0.2 * variabitite)      # Variance augmente avec la flexibilité
+erreur_entrainement <- 0.2 * exp(-0.5 * variabitite) # Erreur d'entraînement diminue
+erreur_test <- biais_carre + variance + erreur_bayes  # Erreur de test = biais_carre + variance + erreur irréductible
+
+# Création du DataFrame
+df <- data.frame(
+  variabitite = rep(variabitite, 5),
+  erreur = c(biais_carre, variance, erreur_entrainement, erreur_test, erreur_bayes),
+  type = rep(c("Biais carre", "Variance", "Erreur d'entraînement", "Erreur de test", "Erreur de Bayes"), each = length(variabitite))
+)
+
+# Tracé avec ggplot
+ggplot(df, aes(x = variabitite, y = erreur, color = type, linetype = type)) +
+  geom_line(size = 1) +
+  labs(title = "Compromis Biais-Variance et Erreurs en fonction de la Flexibilité",
+       x = "Flexibilité du modèle",
+       y = "Erreur") +
+  theme_minimal() #+
+  #theme(legend.title = element_blank())
+
+```
+b- Explication de la forme de chacune des cinq courbes affichées précédement:   
+- Erreur de Bayes est constante, c'est l'erreur irréductible, ce qui se représente une droite horizontale
+- Biais carré diminue progressivement avec la flexibilité qui augmente ce qui est représenté par une fonction exponentielle
+- Variance augmente progressivement avec la flexibilité qui augmente
+- Erreur d'entraînement diminue avec la flexibilité qui augmente
+- Erreur de test est égale à biais_carre + variance + erreur irréductible, elle diminue à mesure que la flexibilité augmente atteignant sont minimum avant de croitre de nouveau à mesure que la flexibilité augmente.
+
+## Exercice 6
+Description de trois applications réelles dans lesquelles la classification pourrait êre utile
+1- Classification des courriels (Spam vs Non-Spam)
+Problème : Filtrer les courriels indésirables (spam).
+Réponse (variable cible) :
+1 = Spam
+0 = Non-Spam
+Prédicteurs :
+Fréquence de certains mots-clés
+Adresse e-mail de l’expéditeur
+Présence de liens ou pièces jointes suspectes
+Longueur du message
+But : Prédiction
+L’objectif est de classer automatiquement les e-mails en fonction de leur contenu et d'éviter que des spams n’atteignent la boîte de réception.
+Il s’agit uniquement d’une prédiction, sans besoin d’inférer les causes sous-jacentes du spam.
+
+2-Détection des faux passeport (Contrefait vs Original)
+Problème: Empêcher l'embarquement des passagers ayant de faux passeports
+Réponse(variable cible):
+1 = Contrefait
+0 = Original
+Prédicteurs:
+Numéro du passeport  
+Présence des différents hologrammes de sécurité
+Nombres de visa
+But: Prédiction
+L'objectif est de reconnaitre automatique les faux passeports et éviter ainsi que leur détenteurs ne puissent voyager en utilisant la compagnie. Il s'agit ici uniquement de prédiction, sans inférence sur les causes sous-jacentes.
+
+3-La détection de soudure défectueuses
+Problème: Empêcher la commercialisation d'équipement indusstriel non conforme
+Réponse(variable cible):
+1 = Défectueuse
+0 = Conforme
+Prédicteurs:
+taille de la soudure
+image de la soudure
+temps de refroidissement
+données ultrasons
+But: Prédiction et inférence
+L'objectif est de détecter précossement les défauts de soudure sur les pièces critiques avant d'éviter des bris sur des équipements stratégique de production. On s'interesse aussi aux causes.
+
+Description de trois applications réelles dans lesquelles la regression pourrait êre utile
+1- Prévision des prix des maisons
+Problème : Estimer le prix d’une maison en fonction de ses caractéristiques.
+Réponse (variable cible) :
+Prix de vente (en dollars)
+Prédicteurs :
+Surface habitable (m²)
+Nombre de chambres
+Nombre de salles de bains
+Localisation (quartier, proximité aux commerces, écoles)
+Année de construction
+État du bien (neuf, rénové, ancien)
+But : Prédiction
+L’objectif est de prédire le prix d’une maison en fonction des caractéristiques observées.
+Il n'est pas important de comprendre l’impact exact de chaque variable. Nous voulons juste obtenir une estimation précise du prix de la maison.
 
 
+2- Prévision des prix d'une action à la bourse
+Problème: Estimer le prix d'une action en fonction des ses caractéristiques.
+Réponse(variable cible):
+Prix de vente de l'action
+Prédicteurs:
+directeur general
+nombre d'employés  
+nouveaux contrat
+But: Prédiction
+L'objectif est de prédire le prix de vente d'une action.
+
+3- Prévision du revenu 
+Problème: Estimer le revenu futur d'un individu en fonction de ses caractéristiques.
+Réponse(variable cible):
+Montant du revenu annuel
+Prédicteurs:
+Niveau de scolaire
+date dernière formation
+domaine d'activité
+ancienneté
+revenu actuel
+employeur(salarié, travailleur autonome)
+But: Prédiction
+L'objectif est de déterminer le salaire future d'une personne connaissant ses caractéristiques. 
+On ne s'interesse par aux niveau d'impacte de chacune de ses différentes variable.
+
+## Exercice 7 
+Avantages et inconvénients d’une approche très flexible (par rapport à une approche moins flexible) de régression ou de classification
+Avantages:
+Faible biais
+Meilleur ajustement aux données (bon apprentissage)
+Performance accrue sur des données riches
+Inconvenients:
+Overfitting(sur ajustement au données d'entrainement)
+consommation accrue des ressources de calculs
+Besoin d'une grande quantité de données
+
+On choisira un modèle plus flexible lorsque l'on a beaucoup de données et que l'on a pas une relation évidente
+entre les variable.
+On choisira un modèle moins fexible lorsque l'on a peut de données et que l'interprétation des données est cruciale.
+
+
+
+## Exercice 8
+Avantages d’une approche paramétrique en régression ou classification:
+- Moins de risque de sur-apprentissage (Overfitting)
+- Rapidité d’entraînement et d’inférence
+- Facilité d’interprétation 
+- Moins de données nécessaires
+Inconvenients d’une approche paramétrique en régression ou classification:
+- Plus de risque de sous-apprentissage (Underfitting)
+- s'ajuste mal sur des données complexes
+
+## Pratique
+
+```{r partie a et b}
+#importation des données
+college <- read.csv("College.csv")
+#visualisation des données
+#View(college)
+#changement du nom des lignes
+rownames(college) = college[,1]
+# suppression de la colonne x
+college= college[, -1]
+View(college)
+
+```
+
+c
+```{r partie c}
+#résumé numérique des données
+table(summary(college))
+
+#Afficher la matrice de nuage de points pour les 10 premières colonnes numériques
+college_10_first = college[,1:10]
+college_10_first_numeric <- college_10_first[, sapply(college_10_first, is.numeric)]  
+pairs(college_10_first_numeric, main="matrice de nuage de points pour les 10 premières colonnes numériques")
+
+#boxplot cote à cote
+#plot(Outstate~Private, data=college, main= "Boxplot de Outstate par Private",
+#     xlab = "Private(Yes/No)", ylab = "Outstate", col=c("lightblue", "lightgreen"),
+#     ylim(range(college$Outstate,na.rm = TRUE)))
+college$Private = as.factor(college$Private)
+plot(Outstate~Private, data = college, main = "Boxplot de Outstate par Private",
+    xlab = "Private (Yes/No)", ylab = "Outstate", col = c("lightblue", "lightgreen"),
+    ylim(range(college$Outstate,na.rm = TRUE)))
+#ggplot(college, aes(x = Private, y = Outstate, fill = Private)) +
+#  geom_boxplot() +
+#  theme_minimal() +
+#  labs(title = "Boxplots de Outstate en fonction de Private") +
+#  facet_wrap(~Private, scales = "fixed")
+
+
+#creation de la variable Elite
+Elite <- rep("No", nrow(college))
+Elite[college$Top10perc > 50] <- "Yes"
+Elite <- as.factor(Elite)
+college <- data.frame(college, Elite)
+
+#Nombre d'université d'elite
+summary(college$Elite)[2]
+
+#boxplot cote à cote de Outstate et Elite
+plot(Outstate~Elite, data = college, main = "Boxplot de Outstate par Elite",
+    xlab = "Elite (Yes/No)", ylab = "Outstate", col = c("lightblue", "lightgreen"),
+    ylim(range(college$Outstate,na.rm = TRUE)))
+
+#ggplot(college, aes(x = Elite, y = Outstate, fill = Elite)) +
+#  geom_boxplot() +
+#  theme_minimal() +
+#  labs(title = "Boxplots de Outstate en fonction de ") +
+#  facet_wrap(~Private, scales = "fixed")
+
+# Les 4 histogrammes en fonction des variables quantitatives suivantes: l'application, l'acceptation, l'inscription puis les frais en dehors de l'État
+
+par(mar=c(4,4,2,1)) #pour réduire les marges 
+par(mfrow=c(2,2)) #Diviser la fenêtre en 2 lignes et 2 colonnes 
+hist(college$Apps,breaks=15,col="skyblue",main="Applications",xlab="Nombres d'applications")
+
+hist(college$Accept,breaks=20,col="lightgreen",main="Acceptations",xlab="Nombre d'acceptations")
+
+hist(college$Enroll,breaks=10,col="orange",main="Inscriptions",xlab="Nombres d'inscriptions")
+
+hist(college$Outstate,breaks=25,col="red",main="Frais hors de l' État",xlab="Frais en dollars")
+```
+
+
+
+```{r exploration}
+
+```
