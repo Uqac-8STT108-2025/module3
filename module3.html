@@ -11,7 +11,7 @@
 
 <meta name="author" content="GroupeB" />
 
-<meta name="date" content="2025-02-04" />
+<meta name="date" content="2025-02-05" />
 
 <title>module3</title>
 
@@ -352,7 +352,7 @@ display: none;
 
 <h1 class="title toc-ignore">module3</h1>
 <h4 class="author">GroupeB</h4>
-<h4 class="date">2025-02-04</h4>
+<h4 class="date">2025-02-05</h4>
 
 </div>
 
@@ -399,10 +399,14 @@ avec peu d’observations, une méthode flexible a assez de lattitude pour
 s’ajuster à l’ensemble des observations et mal généraliser.</p>
 <p>(c)- La relation entre les prédicteurs et la réponse est fortement
 non linéaire.</p>
-<p><strong>Rép</strong> (je ne sais pas)</p>
+<p><strong>Rép</strong>: La méthode flexible est meilleure afin de mieux
+capturer la complexité des relations.</p>
 <p>(d)-La variance des termes d’erreur, c’est-à-dire , est extrêmement
 élevé</p>
-<p><strong>Rép</strong> :</p>
+<p><strong>Rép</strong> : Si la variance est élevé cela signifie que il
+y a beaucoup de bruits donc en utilisant la méthode flexible, elle
+risque de faire un surajustement. Alors la méthode rigide est mieux
+adapter en sachant qu’elle est moins sensible au bruit.</p>
 </div>
 <div id="exercice-2" class="section level2">
 <h2>Exercice 2 :</h2>
@@ -418,7 +422,8 @@ du PDG.</p>
 <strong>regression</strong>, par ce que le salaire est quantitatif
 continue. On veut faire une <strong>inférence</strong>. par ce que ce
 n’est pas le salaire en soi qui nous interesse, mais les variables qui
-le déterminent.</p>
+le déterminent. La taille de l’échantillon n est 500 et le nombre de
+prédicteurs p est 4.</p>
 <p>(b)-Nous envisageons de lancer un nouveau produit et souhaitons
 savoir si ce sera un succès ou un échec. Nous collectons des données sur
 20 produits similaires précédemment lancés. Pour chaque produit, nous
@@ -427,7 +432,8 @@ facturé pour le produit, le budget marketing, le prix de la concurrence
 et dix autres variables.</p>
 <p><strong>Rép</strong>: C’est un problème de
 <strong>classification</strong> (Succès ou échec), on veut faire une
-<strong>prédiction</strong></p>
+<strong>prédiction</strong>. La taille de l’échantillon n est 20 et le
+nombre de prédicteurs p est 13.</p>
 <p>(c)- Nous souhaitons prédire la variation en % du taux de change
 USD/euro par rapport aux variations hebdomadaires des marchés boursiers
 mondiaux. C’est pourquoi nous collectons des données hebdomadaires pour
@@ -436,7 +442,8 @@ variation de la parité USD/Euro, le % de variation du marché américain,
 le % de variation du marché britannique et le % de variation du marché
 allemand.</p>
 <p><strong>Rép</strong>: problème de <strong>regression</strong>, on
-veut faire une <strong>prédiction</strong></p>
+veut faire une <strong>prédiction</strong>.La taille de l’échantillon n
+est … et le nombre de prédicteurs p est 4.</p>
 <div id="exercice-3" class="section level3">
 <h3>Exercice 3</h3>
 <pre class="r"><code>df &lt;- data.frame(
