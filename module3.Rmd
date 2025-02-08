@@ -340,5 +340,23 @@ hist(college$Outstate,breaks=25,col="red",main="Frais hors de l' État",xlab="Fr
 
 
 ```{r exploration}
+# Les étudiants à temps pleins vs les étudiants à temps partiel
+par(mfrow=c(2,2))
+hist(college$F.Undergrad,breaks=15,col="purple",main="Les étudiants à temps pleins ",xlab="Nombres d'étudiants à temps pleins(Full-time)")
+
+hist(college$P.Undergrad,breaks=20,col="magenta",main="Les étudiants à temps partiels",xlab="Nombre d'étudiants à temps partiel(part-time)")
+```
+
+
+Les histogrammes  montrent le nombre d'etudiants dans une université selon leur durée passée aux études. On constate que la majorité des étudiants à l'université sont à temps pleins, le nombres d'étudiants à temps pleins peuvent s'étaler jusqu'à plus de 25000 étudiants.
+```{r nuage-de-point}
+plot(college$Expend,college$Grad.Rate,
+     main = "Lien entre les dépenses et le taux de diplomation",
+     xlab = "Dépenses par étudiant", ylab = "Taux de diplomation",
+     col = "red")
+
+cor(college$Expend, college$Grad.Rate)
 
 ```
+
+Le nuage de point montre un lien entre les dépenses que fait une université par étudiant et le taux de diplomation. Cependant, la corrélation de 0.39 est faible ce qui démontre que  les universités qui investissent plus par étudiant ont un taux de diplomation légèrement plus élevé .Donc, les dépenses par étudiant  ne sont pas un facteur déterminant dans la réussite d'un étudiant.
